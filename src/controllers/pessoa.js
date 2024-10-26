@@ -5,11 +5,13 @@ class ControllerPessoa {
  //todas as funções do controller, recebem req, res
 
 
-    GetPessoas(req,res){
+    async GetPessoas(req,res){
         //todas funções do controller tem try cath, quadrinho, (tenta executar ou capturar um erro)
  try {
-    const pessoas = ServicePessoa.GetPessoas()
+    const pessoas =  await ServicePessoa.GetPessoas()
     res.send({ msg: pessoas })
+    
+
     
  } catch (error) {
     //todo cath vai ser assim

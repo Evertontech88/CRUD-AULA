@@ -4,8 +4,8 @@ const ModelPessoa = require('../models/pessoa')
 
 
 class ServicePessoa {
-    GetPessoas() {
-        return ModelPessoa.GetPessoas()
+   async GetPessoas() {
+        return ModelPessoa.findAll()
     }
     CreatePessoa(nome) {
         return ModelPessoa.CreatePessoa(nome)
