@@ -7,14 +7,44 @@ class ServicePessoa {
    async GetPessoas() {
         return ModelPessoa.findAll()
     }
-    CreatePessoa(nome) {
-        return ModelPessoa.CreatePessoa(nome)
+
+    async CreatePessoa(name, password, email) {
+
+        if (!name){
+
+            throw new Error("Favor preencher todos dados")
+        }
+
+        return ModelPessoa.create({name, password, email})
+
     }
-    UpdatePessoa(id, nome) {
-        return ModelPessoa.UpdatePessoa(id,nome)
+
+    async UpdatePessoa(id, name, password, email) {
+    if(!id){
+        throw new Error("Favor informar o id")
     }
-    DeletePessoa(id, nome) {
-        return ModelPessoa.DeletePessoa(id,nome)
+    const pessoa = await ModelPessoa.findByPk(id)
+    if(!pessoa){
+
+        throw new Error("Pessoa não encontrada")
+    }
+      pessoa.name = name || pessoa.name
+      pessoa.password = password || pessoa.password
+      pessoa.email = email || pessoa.email
+
+      pessoa.save()
+      return pessoa
+      
+
+    }
+
+    async DeletePessoa(id) {
+        const pessoa = await ModelPessoa.findByPk(id)
+
+        if(!pessoa) {
+        throw Error("Pessoa nao encontrada")
+        }
+        return pessoa.destroy({id})
     }
 
 

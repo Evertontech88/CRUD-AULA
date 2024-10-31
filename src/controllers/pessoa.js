@@ -19,11 +19,13 @@ class ControllerPessoa {
     
  }
 }
-    CreatePessoa(req,res) {
+   async CreatePessoa(req,res) {
               
  try {
-    const name = req.body.name
-    const pessoa = ServicePessoa.CreatePessoa(name)
+   
+    const {name, password, email } = req.body
+
+    const pessoa = await ServicePessoa.CreatePessoa(name, password, email)
     res.send({ msg: pessoa })
     
  } catch (error) {
@@ -33,11 +35,16 @@ class ControllerPessoa {
     }
     }
 
-    UpdatePessoa (req,res)    {   //todas funções do controller tem try cath, quadrinho, (tenta executar ou capturar um erro)
-    try {
+    async UpdatePessoa (req,res)    {   //todas funções do controller tem try cath, quadrinho, (tenta executar ou capturar um erro)
+    
+      try {
+
         const id = req.params.id
         const name = req.body.name
-        const pessoas = ServicePessoa.UpdatePessoa(id,name)
+        const password = req.body.password
+        const email = req.body.email
+
+        const pessoas = await ServicePessoa.UpdatePessoa(id,name, password, email)
        res.send({ msg: pessoas })
        
     } catch (error) {
@@ -46,12 +53,12 @@ class ControllerPessoa {
     }   
 
     }
-    DeletePessoa (req,res)    {   //todas funções do controller tem try cath, quadrinho, (tenta executar ou capturar um erro)
+    async DeletePessoa (req,res)    {   //todas funções do controller tem try cath, quadrinho, (tenta executar ou capturar um erro)
     
         try {
             const id = req.params.id
-            const pessoa = ServicePessoa.DeletePessoa(id)
-       res.send({ msg: pessoa })
+            await ServicePessoa.DeletePessoa(id)
+       res.status(204).send()
        
     } catch (error) {
        //todo cath vai ser assim

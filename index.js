@@ -16,7 +16,7 @@ const PORT=3000
 database.db 
   .sync({ force: false })
   .then((_)  => {
-    console.info("Banco conecetado com sucesso")
+    console.info("Banco conectado com sucesso")
 
     app.listen(PORT, ( )=> { //usando o template screnn
       console.info(`Servidor rodando a porta ${PORT}`)

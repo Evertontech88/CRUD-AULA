@@ -16,3 +16,7 @@ routers.get('/', (req,res) => {
 })
 //exportando a rota
 module.exports= routers
+
+
+//post e put tem body
+// get e delete não tem

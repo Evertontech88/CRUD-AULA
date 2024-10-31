@@ -15,6 +15,7 @@ class ModelPessoa {
             name: {
                 type:database.db.Sequelize.STRING
             },
+            
 
             email: {
                 type:database.db.Sequelize.STRING,
