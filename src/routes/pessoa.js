@@ -11,9 +11,9 @@ routers.delete('/:id', controllerPessoa.DeletePessoa)
 
 
 // criando as rotas
-routers.get('/', (req,res) => {
-    res.send({msg: 'funcionou'})
-})
+//routers.get('/', (req,res) => {
+   // res.send({msg: 'funcionou'})
+//})
 //exportando a rota
 module.exports= routers
 
