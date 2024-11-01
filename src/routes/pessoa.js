@@ -1,13 +1,16 @@
 const express = require('express')
 const controllerPessoa = require('../controllers/pessoa')
+const auth = require ("../middleware/auth")
 
 // iniciaçizando as rotas do express
 const routers = express.Router()
 
-routers.get('/',controllerPessoa.GetPessoas)
+
 routers.post('/', controllerPessoa.CreatePessoa)
-routers.put('/:id', controllerPessoa.UpdatePessoa)
-routers.delete('/:id', controllerPessoa.DeletePessoa)
+
+routers.get('/',auth,controllerPessoa.GetPessoas)
+routers.put('/:id',auth, controllerPessoa.UpdatePessoa)
+routers.delete('/:id',auth, controllerPessoa.DeletePessoa)
 
 
 // criando as rotas
