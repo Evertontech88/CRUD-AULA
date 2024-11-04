@@ -1,21 +1,21 @@
-const jwt = require('jsonwebtoken')
+const jwt = require("jsonwebtoken")
 
 function auth(req, res, next) {
-
-    console.log('estou no middleware')
     const token = req.headers['authorization']
-
-    if (!token) {
-        return res.status(400).send({ msg: "Token não autorizado" })
+    
+    if(!token) {
+        return res.status(400)
+            .send({ msg: "Token não informado ou sem permissão."})
     }
 
     jwt.verify(token, "segredo", (err, decoded) => {
         if (err) {
             console.error('Erro ao decodificar', err)
-            return res.status(400).send({ msg: "Token não autorizado" })
+            return res.status(400)
+                .send({ msg: "Token não informado ou sem permissão."})
         }
 
-        console.log(decoded)   //validar o usuario
+        console.log(decoded)
 
         next()
     })

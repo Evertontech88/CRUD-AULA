@@ -1,25 +1,17 @@
 const express = require('express')
 const controllerPessoa = require('../controllers/pessoa')
-const auth = require ("../middleware/auth")
+const auth = require("../middleware/auth")
 
-// iniciaçizando as rotas do express
-const routers = express.Router()
+// Inicializando as rotas do express
+const router = express.Router()
 
+// Criando as rotas
+router.post('/', controllerPessoa.CreatePessoa)
+router.post('/login', controllerPessoa.Login)
 
-routers.post('/', controllerPessoa.CreatePessoa)
+router.get('/', auth, controllerPessoa.GetPessoas)
+router.put('/:id', auth, controllerPessoa.UpdatePessoa)
+router.delete('/:id', auth, controllerPessoa.DeletePessoa)
 
-routers.get('/',auth,controllerPessoa.GetPessoas)
-routers.put('/:id',auth, controllerPessoa.UpdatePessoa)
-routers.delete('/:id',auth, controllerPessoa.DeletePessoa)
-
-
-// criando as rotas
-//routers.get('/', (req,res) => {
-   // res.send({msg: 'funcionou'})
-//})
-//exportando a rota
-module.exports= routers
-
-
-//post e put tem body
-// get e delete não tem
+// Exportar as rotas
+module.exports = router
